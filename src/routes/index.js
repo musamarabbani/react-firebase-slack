@@ -1,8 +1,8 @@
 import React from 'react';
-import App from '../components/App';
-import Login from '../components/Auth/Login';
-import Register from '../components/Auth/Register';
-import NotFound from '../components/404';
+import App from '@components/App';
+import Login from '@components/Auth/Login';
+import Register from '@components/Auth/Register';
+import NotFound from '@components/404';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const AppRoutes = () => {
