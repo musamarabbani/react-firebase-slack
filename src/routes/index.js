@@ -13,7 +13,6 @@ class AppRoutes extends Component {
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
-				console.log('user', user);
 				this.props.setUser(user);
 				this.props.history.push('/');
 			}
