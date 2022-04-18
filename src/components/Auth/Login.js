@@ -8,8 +8,9 @@ import {
 	Message,
 	Icon,
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { firebase } from '@components/firebase';
+import { connect } from 'react-redux';
 
 class Login extends Component {
 	state = {
@@ -19,6 +20,12 @@ class Login extends Component {
 		loading: false,
 		usersRef: firebase.database().ref('users'),
 	};
+	componentDidMount() {
+		if (this.props.user) {
+			console.log('called');
+			this.props.history.push('/');
+		}
+	}
 	isFormValid = () => {
 		let errors = [];
 		let error;
@@ -42,7 +49,10 @@ class Login extends Component {
 			.auth()
 			.signInWithEmailAndPassword(this.state.email, this.state.password)
 			.then((signedInUser) => {
-				console.log('signedInUser ==>', signedInUser);
+				this.setState({
+					loading: false,
+				});
+				this.props.history.push('/');
 			})
 			.catch((error) => {
 				this.setState({
@@ -118,4 +128,7 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+const mapStateFromProps = (state) => ({
+	user: state.user.currentUser,
+});
+export default connect(mapStateFromProps)(withRouter(Login));
