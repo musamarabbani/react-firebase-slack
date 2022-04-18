@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import * as firebase from 'firebase';
 // import { getAnalytics } from 'firebase/analytics';
 import 'firebase/auth';
 import 'firebase/database';
@@ -12,9 +12,13 @@ const firebaseConfig = {
 	messagingSenderId: '722181497459',
 	appId: '1:722181497459:web:d4790933746036a2790006',
 	measurementId: 'G-9QEZ84MBJ8',
+	databaseURL: 'react-slack-clone-4b350-default-rtdb.firebaseio.com',
 };
 
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
+const auth = firebase.auth();
 // const analytics = getAnalytics(app);
 
-export default app;
+export { firebase, database, auth };
