@@ -5,16 +5,21 @@ import Register from '@components/Auth/Register';
 import NotFound from '@components/404';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { firebase } from '../components/firebase';
-import { setUser } from '../redux/actions';
+import { setUser, clearUser } from '../redux/actions';
 import { connect } from 'react-redux';
 import Spinner from '../components/Spinner';
 
 class AppRoutes extends Component {
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged((user) => {
+			console.log('user', user);
 			if (user) {
-				this.props.setUser(user);
 				this.props.history.push('/');
+				this.props.setUser(user);
+			} else {
+				debugger;
+				this.props.clearUser();
+				this.props.history.push('/login');
 			}
 		});
 	}
@@ -23,9 +28,9 @@ class AppRoutes extends Component {
 			<Spinner />
 		) : (
 			<Switch>
-				<Route exact path='/login' component={Login} />
-				<Route exact path='/register' component={Register} />
 				<Route exact path='/' component={App} />
+				<Route path='/login' component={Login} />
+				<Route path='/register' component={Register} />
 				<Route path='*' component={NotFound} />
 			</Switch>
 		);
@@ -35,4 +40,6 @@ class AppRoutes extends Component {
 const mapStateFromProps = (state) => ({
 	isLoading: state.user.isLoading,
 });
-export default connect(mapStateFromProps, { setUser })(withRouter(AppRoutes));
+export default connect(mapStateFromProps, { setUser, clearUser })(
+	withRouter(AppRoutes)
+);
