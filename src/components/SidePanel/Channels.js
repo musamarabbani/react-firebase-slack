@@ -1,0 +1,22 @@
+import React from 'react';
+import { Menu, Icon } from 'semantic-ui-react';
+
+class Channels extends React.Component {
+  state = { channels: [] };
+  render() {
+    const { channels } = this.state;
+    return (
+      <Menu.Menu>
+        <Menu.Item>
+          <span>
+            <Icon name="exchange" />
+            CHANNELS
+          </span>
+          ({channels.length}) <Icon name="add" />
+        </Menu.Item>
+      </Menu.Menu>
+    );
+  }
+}
+
+export default Channels;
