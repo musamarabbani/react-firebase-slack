@@ -3,7 +3,7 @@ import App from '@components/App';
 import Login from '@components/Auth/Login';
 import Register from '@components/Auth/Register';
 import NotFound from '@components/404';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch,Route, withRouter } from 'react-router-dom';
 import { firebase } from '../components/firebase';
 import { setUser, clearUser } from '../redux/actions';
 import { connect } from 'react-redux';
@@ -30,6 +30,7 @@ class AppRoutes extends Component {
 				<AuthGuard auth={this.props.user} component={App} exact path='/' />
 				<Route component={Login} path='/login' />
 				<Route component={Register} path='/register' />
+				<Route path='*' component={NotFound} />
 			</Switch>
 		);
 	}

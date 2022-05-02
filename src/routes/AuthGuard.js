@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 class AuthGuard extends React.Component {
 	render() {
 		const { auth, component: Component } = this.props;
+		console.log('auth ==>', auth);
 		return (
 			<Route
 				render={(rest) =>
