@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
 
 class AuthGuard extends React.Component {
   render() {
@@ -9,9 +8,4 @@ class AuthGuard extends React.Component {
   }
 }
 
-const mapStateFromProps = (state) => ({
-  isLoading: state.user.isLoading,
-  user: state.user.currentUser,
-});
-
-export default connect(mapStateFromProps)(withRouter(AuthGuard));
+export default AuthGuard;
