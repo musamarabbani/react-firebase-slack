@@ -1,20 +1,52 @@
 import React from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
 
 class Channels extends React.Component {
-  state = { channels: [] };
+  state = { channels: [], channelName: '', channelDetails: '', modal: false };
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  closeModal = () => this.setState({ modal: false });
+  openModal = () => this.setState({ modal: true });
+
   render() {
-    const { channels } = this.state;
+    const { channels, modal } = this.state;
     return (
-      <Menu.Menu>
-        <Menu.Item>
-          <span>
-            <Icon name="exchange" />
-            CHANNELS
-          </span>
-          ({channels.length}) <Icon name="add" />
-        </Menu.Item>
-      </Menu.Menu>
+      <React.Fragment>
+        <Menu.Menu>
+          <Menu.Item>
+            <span>
+              <Icon name="exchange" />
+              CHANNELS
+            </span>
+            ({channels.length}) <Icon name="add" onClick={this.openModal} />
+          </Menu.Item>
+        </Menu.Menu>
+        <Modal>
+          <Modal.Header>Add a Channel</Modal.Header>
+          <Modal.Content>
+            <Form>
+              <Form.Field>
+                <Input fluid onChange={this.handleChange} name="channelName" label="Name of Channel" />
+              </Form.Field>
+              <Form.Field>
+                <Input fluid onChange={this.handleChange} name="channelDetails" label="About the Channel" />
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="green" inverted>
+              <Icon name="checkmart" /> Add
+            </Button>
+            <Button color="red" inverted>
+              <Icon name="remove" /> Cancel
+            </Button>
+          </Modal.Actions>
+        </Modal>
+      </React.Fragment>
     );
   }
 }
