@@ -25,7 +25,7 @@ class Channels extends React.Component {
             ({channels.length}) <Icon name="add" onClick={this.openModal} />
           </Menu.Item>
         </Menu.Menu>
-        <Modal>
+        <Modal basic open={modal} onClose={this.closeModal}>
           <Modal.Header>Add a Channel</Modal.Header>
           <Modal.Content>
             <Form>
@@ -38,10 +38,10 @@ class Channels extends React.Component {
             </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button color="green" inverted>
-              <Icon name="checkmart" /> Add
+            <Button className="cursor-pointer" color="green" inverted>
+              <Icon name="check" /> Add
             </Button>
-            <Button color="red" inverted>
+            <Button color="red" inverted onClick={this.closeModal}>
               <Icon name="remove" /> Cancel
             </Button>
           </Modal.Actions>
