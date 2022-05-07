@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
+import { Header, Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
 
 class Channels extends React.Component {
   state = { channels: [], channelName: '', channelDetails: '', modal: false };
@@ -16,7 +16,7 @@ class Channels extends React.Component {
     const { channels, modal } = this.state;
     return (
       <React.Fragment>
-        <Menu.Menu>
+        <Menu.Menu style={{ paddingBottom: '2em' }}>
           <Menu.Item>
             <span>
               <Icon name="exchange" />
@@ -25,8 +25,8 @@ class Channels extends React.Component {
             ({channels.length}) <Icon name="add" onClick={this.openModal} />
           </Menu.Item>
         </Menu.Menu>
-        <Modal basic open={modal} onClose={this.closeModal}>
-          <Modal.Header>Add a Channel</Modal.Header>
+        <Modal basic size="small" open={modal} onClose={this.closeModal}>
+          <Header>Add a Channel</Header>
           <Modal.Content>
             <Form>
               <Form.Field>
