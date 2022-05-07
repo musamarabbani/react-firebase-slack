@@ -34,6 +34,7 @@ class Channels extends React.Component {
   removeListeners = () => {
     this.state.channelsRef.off();
   };
+
   setFirstChannel = () => {
     if (this.state.firstLoad && this.state.channels.length > 0) {
       let firstChannel = this.state.channels[0];
