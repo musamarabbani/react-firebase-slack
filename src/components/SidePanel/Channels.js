@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 class Channels extends React.Component {
   state = {
+    activeChannel: '',
+    firstLoad: true,
     user: this.props.currentUser,
     channels: [],
     channelName: '',
@@ -22,10 +24,22 @@ class Channels extends React.Component {
     let loadedChannels = [];
     this.state.channelsRef.on('child_added', (snap) => {
       loadedChannels.push(snap.val());
-      this.setState({ channels: loadedChannels });
+      this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
     });
   };
 
+  setFirstChannel = () => {
+    if (this.state.firstLoad && this.state.channels.length > 0) {
+      let firstChannel = this.state.channels[0];
+      this.props.setCurrentChannel(firstChannel);
+      this.setActiveChannel(firstChannel);
+    }
+    this.setState({ firstLoad: false });
+  };
+
+  setActiveChannel = (currentChannel) => {
+    this.setState({ activeChannel: currentChannel });
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.isFormValid(this.state)) {
@@ -74,7 +88,16 @@ class Channels extends React.Component {
   displayChannel = (channels) =>
     channels.length > 0 &&
     channels.map((channel) => (
-      <Menu.Item key={channel.id} style={{ opacity: 0.7 }} name={channel.name} onClick={() => this.changeChannel(channel)}>
+      <Menu.Item
+        key={channel.id}
+        style={{ opacity: 0.7 }}
+        active={this.state.activeChannel.id === channel.id}
+        name={channel.name}
+        onClick={() => {
+          this.changeChannel(channel);
+          this.setActiveChannel(channel);
+        }}
+      >
         #{channel.name}
       </Menu.Item>
     ));
