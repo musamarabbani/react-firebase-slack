@@ -1,7 +1,26 @@
-.modal{
-    height: auto;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
+html,
+body,
+.app {
+  height: 100vh;
+  background: #eee;
+  padding: 1em;
+}
+.modal {
+  height: auto;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+}
+.messages {
+  height: 440px;
+  overflow-y: scroll;
+}
+.messages__form {
+  position: fixed;
+  bottom: 1em;
+  margin-left: 320px !important;
+  left: 0;
+  right: 1em;
+  z-index: 200;
 }
