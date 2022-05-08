@@ -24,3 +24,7 @@ body,
   right: 1em;
   z-index: 200;
 }
+.messages__self {
+  border-left: 2px solid orange;
+  padding-left: 8px;
+}
