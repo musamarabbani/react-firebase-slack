@@ -3,7 +3,7 @@ import { Button, Modal, Input, Icon } from 'semantic-ui-react';
 import mime from 'mime-types';
 
 class FileModal extends React.Component {
-  state = { file: '', authorized: ['images/jpeg', 'images/png'] };
+  state = { file: '', authorized: ['image/jpeg', 'image/png'] };
 
   addFile = (event) => {
     const file = event.target.files[0];
@@ -13,7 +13,6 @@ class FileModal extends React.Component {
   };
   sendFile = () => {
     const { file } = this.state;
-    console.log('file ==>', file);
     const { uploadFile, closeModal } = this.props;
     if (file !== null) {
       if (this.isAuthorized(file.name)) {

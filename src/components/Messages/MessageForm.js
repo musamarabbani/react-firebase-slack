@@ -73,35 +73,41 @@ class MessageForm extends React.Component {
         uploadTask: this.state.storageRef.child(filePath).put(file, metadata)
       },
       () => {
-        this.state.uploadTask.on(
-          'state_changed',
-          (snap) => {
-            const percentUploaded = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
-            this.setState({ percentUploaded });
-            this.props.isProgressBarVisible(percentUploaded);
-          },
-          (err) => {
-            console.error('err ==>', err);
-            this.setState({
-              errors: this.state.errors.concat(err),
-              uploadState: 'error',
-              uploadTask: null
-            });
-          },
-          () => {
-            this.state.uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
-              this.sendFileMessage(downloadUrl, ref, pathToUpload);
-            });
-          },
-          (err) => {
-            console.error('err ==>', err);
-            this.setState({
-              errors: this.state.errors.concat(err),
-              uploadState: 'error',
-              uploadTask: null
-            });
-          }
-        );
+        try {
+          this.state.uploadTask.on(
+            'state_changed',
+            (snap) => {
+              const percentUploaded = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+              this.setState({ percentUploaded });
+              this.props.isProgressBarVisible(percentUploaded);
+            },
+            (err) => {
+              console.error('err ==>', err);
+              this.setState({
+                errors: this.state.errors.concat(err),
+                uploadState: 'error',
+                uploadTask: null
+              });
+            },
+            () => {
+              this.state.uploadTask.snapshot.ref
+                .getDownloadURL()
+                .then((downloadUrl) => {
+                  this.sendFileMessage(downloadUrl, ref, pathToUpload);
+                })
+                .catch((err) => {
+                  console.error('err ==>', err);
+                  this.setState({
+                    errors: this.state.errors.concat(err),
+                    uploadState: 'error',
+                    uploadTask: null
+                  });
+                });
+            }
+          );
+        } catch (err) {
+          console.log('file upload err', err);
+        }
       }
     );
   };
