@@ -50,7 +50,7 @@ class Messages extends React.Component {
           <Comment.Group className={progressBar ? 'messages__progress' : 'messages'}>{this.displayMessages(messages)}</Comment.Group>
         </Segment>
 
-        <MessageForm messagesRef={messagesRef} currentUser={user} currentChannel={channel} progressBar={this.isProgressBarVisible} />
+        <MessageForm messagesRef={messagesRef} currentUser={user} currentChannel={channel} isProgressBarVisible={this.isProgressBarVisible} />
       </React.Fragment>
     );
   }
