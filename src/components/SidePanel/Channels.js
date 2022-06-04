@@ -112,7 +112,7 @@ class Channels extends React.Component {
     const { channels, modal } = this.state;
     return (
       <React.Fragment>
-        <Menu.Menu style={{ paddingBottom: '2em' }}>
+        <Menu.Menu className="menu">
           <Menu.Item>
             <span>
               <Icon name="exchange" />
@@ -127,10 +127,20 @@ class Channels extends React.Component {
           <Modal.Content>
             <Form>
               <Form.Field>
-                <Input fluid onChange={this.handleChange} name="channelName" label="Name of Channel" />
+                <Input
+                  fluid
+                  onChange={this.handleChange}
+                  name="channelName"
+                  label="Name of Channel"
+                />
               </Form.Field>
               <Form.Field>
-                <Input fluid onChange={this.handleChange} name="channelDetails" label="About the Channel" />
+                <Input
+                  fluid
+                  onChange={this.handleChange}
+                  name="channelDetails"
+                  label="About the Channel"
+                />
               </Form.Field>
             </Form>
           </Modal.Content>
