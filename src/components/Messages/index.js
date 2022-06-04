@@ -124,7 +124,7 @@ class Messages extends React.Component {
           currentChannel={channel}
           isProgressBarVisible={this.isProgressBarVisible}
           isPrivateChannel={privateChannel}
-          getMessagesRef={this.getMessagesRef}
+          getMessagesRef={this.getMessagesRef()}
         />
       </React.Fragment>
     );

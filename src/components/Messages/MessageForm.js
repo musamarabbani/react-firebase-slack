@@ -24,7 +24,7 @@ class MessageForm extends React.Component {
       [event.target.name]: event.target.value
     });
   };
-  createMessage = (fileUrl) => {
+  createMessage = (fileUrl = null) => {
     const { user } = this.state;
     const message = {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -34,6 +34,7 @@ class MessageForm extends React.Component {
         avatar: user.photoURL
       }
     };
+
     if (fileUrl !== null) {
       message['image'] = fileUrl;
     } else {
@@ -65,7 +66,7 @@ class MessageForm extends React.Component {
   };
   getPath = () => {
     if (this.props.isPrivateChannel) {
-      return `chat/private/${thi.state.channel.id}`;
+      return `chat/private/${this.state.channel.id}`;
     } else {
       return 'chat/public';
     }
