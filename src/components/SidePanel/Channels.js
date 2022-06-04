@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
 import { firebase } from '../firebase';
-import { setCurrentChannel } from '../../redux/actions';
+import { setCurrentChannel, setPrivateChannel } from '../../redux/actions';
 import { connect } from 'react-redux';
 
 class Channels extends React.Component {
@@ -90,7 +90,9 @@ class Channels extends React.Component {
   openModal = () => this.setState({ modal: true });
 
   changeChannel = (channel) => {
+    this.setActiveChannel(channel);
     this.props.setCurrentChannel(channel);
+    this.props.setPrivateChannel(false);
   };
   displayChannel = (channels) =>
     channels.length > 0 &&
@@ -102,7 +104,6 @@ class Channels extends React.Component {
         name={channel.name}
         onClick={() => {
           this.changeChannel(channel);
-          this.setActiveChannel(channel);
         }}
       >
         #{channel.name}
@@ -158,4 +159,4 @@ class Channels extends React.Component {
   }
 }
 
-export default connect(null, { setCurrentChannel })(Channels);
+export default connect(null, { setCurrentChannel, setPrivateChannel })(Channels);

@@ -7,13 +7,18 @@ import SidePanel from './SidePanel';
 import { connect } from 'react-redux';
 import './App.css';
 
-const App = ({ currentUser, currentChannel }) => (
+const App = ({ currentUser, currentChannel, isPrivateChannel }) => (
   <Grid columns="equal" className="app" style={{ background: '#eee' }}>
     <ColorPanel />
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
     <Grid.Column style={{ marginLeft: 320 }}>
-      <Messages key={currentChannel && currentChannel.id} currentUser={currentUser} currentChannel={currentChannel} />
+      <Messages
+        key={currentChannel && currentChannel.id}
+        currentUser={currentUser}
+        currentChannel={currentChannel}
+        isPrivateChannel={isPrivateChannel}
+      />
     </Grid.Column>
 
     <Grid.Column width={4}>
@@ -24,7 +29,8 @@ const App = ({ currentUser, currentChannel }) => (
 
 const mapStateFromProps = ({ user, channel }) => ({
   currentUser: user.currentUser,
-  currentChannel: channel.currentChannel
+  currentChannel: channel.currentChannel,
+  isPrivateChannel: channel.isPrivateChannel
 });
 
 export default connect(mapStateFromProps)(App);
