@@ -12,6 +12,9 @@ body,
   left: auto;
   right: auto;
 }
+.menu {
+  padding-bottom: 2em;
+}
 .messages {
   height: 62vh;
   overflow-y: scroll;
@@ -39,6 +42,6 @@ body,
   margin: 0.3em 0 0 0 !important;
   height: 30px;
 }
-.progress__bar .bar{
-  width: 100% !important
+.progress__bar .bar {
+  width: 100% !important;
 }
