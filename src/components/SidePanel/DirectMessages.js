@@ -6,6 +6,7 @@ import { setCurrentChannel, setPrivateChannel } from '../../redux/actions';
 
 class DirectMessages extends React.Component {
   state = {
+    activeChannel: '',
     user: this.props.currentUser,
     users: [],
     userRef: firebase.database().ref('users'),
@@ -68,13 +69,18 @@ class DirectMessages extends React.Component {
     };
     this.props.setCurrentChannel(channelData);
     this.props.setPrivateChannel(true);
+    this.setActiveChannel(user.uid);
+  };
+
+  setActiveChannel = (userId) => {
+    this.setState({ activeChannel: userId });
   };
   getChannelId = (userId) => {
     const currentUserId = this.state.user.uid;
     return userId < currentUserId ? `${userId}/${currentUserId}` : `${currentUserId}/${userId}`;
   };
   render() {
-    const { users } = this.state;
+    const { users, activeChannel } = this.state;
     return (
       <Menu.Menu>
         <Menu.Item>
@@ -87,6 +93,7 @@ class DirectMessages extends React.Component {
         {users.map((user) => (
           <Menu.Item
             key={user.uid}
+            active={user.uid === activeChannel}
             style={{
               opacity: '0.7',
               fontStyle: 'italic'
